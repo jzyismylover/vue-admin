@@ -12,7 +12,7 @@
               src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
             ></el-avatar>
             <div class="username">
-              <h1></h1>
+              <h1>管理员</h1>
             </div>
             <div style="height: 10vh;"></div>
             <!-- 导航栏 -->
@@ -28,14 +28,6 @@
               <el-menu-item index="/home/staff">
                 <i class="el-icon-s-custom"></i>
                 <span slot="title">职工管理</span>
-              </el-menu-item>
-              <el-menu-item index="/home/client">
-                <i class="el-icon-user"></i>
-                <span slot="title">客户管理</span>
-              </el-menu-item>
-              <el-menu-item index="/home/data">
-                <i class="el-icon-s-data"></i>
-                <span slot="title">数据统计</span>
               </el-menu-item>
             </el-menu>
           </el-col>
@@ -53,9 +45,9 @@
                     <el-button icon="el-icon-s-tools" circle></el-button>
                   </span>
                   <el-dropdown-menu slot="dropdown">
-                    ><el-dropdown-item icon="el-icon-setting" command="1">
-                      退出
-                    </el-dropdown-item>
+                    <el-dropdown-item icon="el-icon-setting" :command="item.index" v-for="item in dropdownList" :key="item.index">
+                      {{$t(`home.${item.name}`)}}
+                    </el-dropdown-item>        
                   </el-dropdown-menu>
                 </el-dropdown>
               </el-col>
@@ -79,25 +71,40 @@ export default {
   name: 'home',
   data() {
     return {
-      actived: '1'
+      actived: '1',
+      dropdownList: [
+        { index: '0', icon: 'el-icon-setting', name: "setting" },
+        { index: '1', icon: 'el-icon-setting', name: "changeLan" },
+        { index: '2', icon: 'el-icon-setting', name: "logOut" },
+      ]
     }
+  },
+  mounted() {
+    this.$api('/login').then(data => {
+
+    })
+    this.$success('hello')
   },
   methods: {
     handleCommand(command) {
+      console.log(command);
+      
       switch (command) {
-        case '0':
+        case '1':
           const lang = this.$store.state.locale
           if (lang == 'en') {
-            this.$store.commit('SET_LANG', 'zn')
-            this.$i18n.locale = 'zn'
+            this.$store.commit('SET_LANG', 'zh')
+            this.$i18n.locale = 'zh'
           } else {
             this.$store.commit('SET_LANG', 'en')
             this.$i18n.locale = 'en'
           }
+          console.log(this.$t('home.setting'));
+          
           break
-        case '1':
+        case '2':
           localStorage.clear()
-          this.$store.commit('setStateAtStart')
+          // this.$store.commit('setStateAtStart')
           this.$router.replace('/')
       }
     },
@@ -180,6 +187,7 @@ export default {
   }
 }
 .elfoot {
+  font-size: 0.8rem;
   background: #696969;
   border-radius: 0 0 0 2rem/ 0 0 0 3.5rem;
   color: white;

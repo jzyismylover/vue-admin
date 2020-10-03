@@ -1,0 +1,8 @@
+{
+    "login": {},
+    "home": {
+        "setting": "设置",
+        "logOut": "退出",
+        "changeLan": "切换语言"
+    }
+}

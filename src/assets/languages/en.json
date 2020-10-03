@@ -1,0 +1,8 @@
+{
+    "login": {},
+    "home": {
+        "setting": "Setting",
+        "logOut": "Log out",
+        "changeLan": "Change Language"
+    }
+}
