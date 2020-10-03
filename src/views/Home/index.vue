@@ -54,7 +54,9 @@
             </el-row>
           </el-header>
           <el-main class="elmain">
-            <div class="elmain-inbox"/>
+            <div class="elmain-inbox">
+              <router-view></router-view>
+            </div>
           </el-main>
           <!-- 底部栏 -->
           <el-footer height="5vh" class="elfoot">
@@ -181,9 +183,12 @@ export default {
   height: 89vh;
   background-color: #F5F5F5;
   .elmain-inbox {
+    text-align: left;
+    box-sizing: border-box;
+    padding: 15px;
     height: 100%;
     background-color: #fff;
-    border-radius: 1rem 0 2rem 2rem / 1rem 0 2.3rem 2.3rem;
+    border-radius: 1rem 1rem 2rem 2rem / 1rem 1rem 2.3rem 2.3rem;
   }
 }
 .elfoot {
